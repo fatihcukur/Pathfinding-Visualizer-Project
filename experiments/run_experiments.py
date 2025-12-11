@@ -4,7 +4,7 @@ import csv
 import heapq
 from collections import deque
 
-# --- ALGORİTMA MANTIKLARI (Görselsiz) ---
+# --- ALGORITHMS LOGICS (Without Images) ---
 
 def heuristic(p1, p2):
     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
@@ -95,7 +95,7 @@ def run_bfs(grid_size, start, end, barriers):
                 q.append(neighbor)
     return False, visited_count
 
-# --- DENEY KURULUMU ---
+# --- EXPERIMENTAL SETUP ---
 
 def generate_random_barriers(grid_size, probability=0.2):
     barriers = set()
@@ -110,14 +110,14 @@ def main():
     trials = 10 # Her boyut için kaç deneme yapılsın
     filename = "results.csv"
     
-    print("Deneyler basliyor... (Bu islem biraz surebilir)")
+    print("Experiments Starting... (This process may take a little time)")
 
     with open(filename, mode='w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["algo", "n", "trial", "time_ms", "visited_nodes"])
 
         for n in sizes:
-            print(f"Grid boyutu test ediliyor: {n}x{n}")
+            print(f"Grid size is being test: {n}x{n}")
             for t in range(trials):
                 start = (0, 0)
                 end = (n-1, n-1)
@@ -145,7 +145,8 @@ def main():
                 et = time.time()
                 writer.writerow(["BFS", n, t, (et-st)*1000, 0])
     
-    print(f"Deney tamamlandi! Sonuclar '{filename}' dosyasina kaydedildi.")
+    print(f"Experiment Completed! Results were saved to file '{filename}'")
 
 if __name__ == "__main__":
+
     main()
