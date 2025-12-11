@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 
 def main():
     try:
-        # CSV dosyasını oku
+        # Read file CSV 
         df = pd.read_csv("results.csv")
         
-        # Grid boyutuna (n) ve Algoritmaya göre ortalama süreyi al
+        # Calculate the average time based on the grid size (n) and the algorithm
         avg_times = df.groupby(['algo', 'n'])['time_ms'].mean().unstack(level=0)
 
-        # Grafiği çiz
+        # Draw the graph
         plt.figure(figsize=(10, 6))
         
         for algo in avg_times.columns:
@@ -21,13 +21,14 @@ def main():
         plt.legend()
         plt.grid(True)
         
-        # Resmi kaydet (Bir üst klasördeki plots içine)
+        # Save the image (into the plots folder in the parent directory)
         plt.savefig("../plots/runtime_comparison.png")
-        print("Grafik 'plots/runtime_comparison.png' olarak kaydedildi.")
+        print("The graph was saved as 'plots/runtime_comparison.png'")
         plt.show()
 
     except FileNotFoundError:
-        print("HATA: 'results.csv' bulunamadi. Önce run_experiments.py calistirilmali.")
+        print("ERROR: 'results.csv' has not found. Firstly run_experiments.py should be run.")
 
 if __name__ == "__main__":
+
     main()
